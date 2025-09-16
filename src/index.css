@@ -67,9 +67,18 @@ button:focus-visible {
   }
 } */
 
-body, #root {
+/* body, #root {
   margin: 0;
   padding: 0;
-}
+} */
 
 @import "tailwindcss";
+
+@theme {
+  --color-primary: #cc7408;
+}
+
+.container-centered {
+  /* @apply w-[80%] mx-auto; 80% width and auto margin for centering */
+  @apply w-full md:w-[80%] mx-auto;
+}

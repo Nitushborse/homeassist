@@ -1,16 +1,25 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import LandingPage from "./pages/LandingPage"
-import Register from "./pages/Register"
+// import './App.css'
+import { Outlet, useLocation } from 'react-router-dom'
+import Navbar from './components/Navbar'
+import Footer from './components/Footer'
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { fetchUser } from "./features/auth/authSlice"; 
+
 function App() {
-  const [count, setCount] = useState(0)
+  const location = useLocation();
+  const hideLayout = ["/register", "/login"].includes(location.pathname);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchUser());
+  }, [dispatch]);
 
   return (
     <>
-      {/* <LandingPage /> */}
-      <Register />
+      {!hideLayout && <Navbar />}
+      <Outlet />
+      {!hideLayout && <Footer />}
     </>
   )
 }
