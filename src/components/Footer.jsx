@@ -1,15 +1,4 @@
-// export default function FooterCTA() {
-//   return (
-//     <footer className="bg-blue-600 text-white text-center py-10">
-//       <h3 className="text-2xl font-semibold mb-4">Ready to get started?</h3>
-//       <button className="bg-white text-blue-600 px-6 py-3 rounded-lg font-medium hover:bg-gray-100">
-//         Join Now
-//       </button>
-//     </footer>
-//   );
-// }
-
-// src/components/Footer.jsx
+import { NavLink } from 'react-router-dom';
 export default function Footer() {
   return (
     <footer className="container-centered rounded-sm mb-2 bg-primary text-white mt-10">
@@ -27,10 +16,10 @@ export default function Footer() {
           {/* Quick Links */}
           <div className="flex flex-col gap-2">
             <h3 className="font-semibold text-lg">Quick Links</h3>
-            <a href="/" className="hover:underline">Home</a>
-            <a href="/about" className="hover:underline">About</a>
-            <a href="/services" className="hover:underline">Services</a>
-            <a href="/feedback" className="hover:underline">Feedback</a>
+            <NavLink to="/" className="hover:underline">Home</NavLink>
+            <NavLink to="/about" className="hover:underline">About</NavLink>
+            <NavLink to="/services" className="hover:underline">Services</NavLink>
+            <NavLink to="/feedback" className="hover:underline">Feedback</NavLink>
           </div>
 
           {/* Contact Info */}
@@ -38,7 +27,7 @@ export default function Footer() {
             <h3 className="font-semibold text-lg">Contact Us</h3>
             <p>Email: support@homeassist.com</p>
             <p>Phone: +91 98765 43210</p>
-            <p>Address: Pune, India</p>
+            <p>Address: Shirpur, Maharashtra, India</p>
           </div>
         </div>
 

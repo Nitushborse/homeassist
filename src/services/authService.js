@@ -7,7 +7,7 @@ export const registerUser = async (userData) => {
   return data;
 };
 
-// Login user (cookies automatically stored by server)
+
 export const loginUser = async (credentials) => {
   const { data } = await axiosInstance.post('/user/login', credentials);
   return data; // contains user info + access/refresh tokens (in cookies)
@@ -21,5 +21,26 @@ export const logoutUser = async () => {
 // Get currently authenticated user
 export const getCurrentUser = async () => {
   const { data } = await axiosInstance.get('/user/currentuser');
-  return data.data; // return only user data
+  return data.data; 
 };
+
+export const updateProfile = async (userData) => {
+  const formData = new FormData();
+  if (userData.phone) formData.append("phone", userData.phone);
+  if (userData.location) formData.append("location", userData.location);
+  if (userData.skills) formData.append("skills", userData.skills);
+  if (userData.bio) formData.append("bio", userData.bio);
+  if (userData.avatarFile) formData.append("avatar", userData.avatarFile);
+
+  const { data } = await axiosInstance.patch("/user/profile", formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
+
+  return data.data; // updated user
+};
+
+export const getUserById = async (userId) => {
+  const { data } = await axiosInstance.get(`/user/getuserbyid/${userId}`);
+  return data.data; 
+};
+

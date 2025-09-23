@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -6,9 +5,10 @@ import { loginUser } from "../services/authService";
 import { setUser } from "../features/auth/authSlice.js"; 
 
 export default function Login() {
-  const [formData, setFormData] = useState({ email: "", password: "" }); 
+  const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -23,21 +23,20 @@ export default function Login() {
     setLoading(true);
 
     try {
-      const res = await loginUser(formData); 
-      const user = res?.data?.user; 
-      console.log(user)
+      const res = await loginUser(formData);
+      const user = res?.data?.user;
+
       if (!user) throw new Error("Login failed: user not found");
 
-      
       dispatch(setUser(user));
 
-     
+      // role based navigation
       switch (user.role) {
         case "admin":
-          navigate("/mypost");
+          navigate("/admin/dashboard");
           break;
         case "client":
-          navigate("/client/dashboard");
+          navigate("/client/posts");
           break;
         case "freelancer":
           navigate("/freelancer/dashboard");
@@ -46,7 +45,25 @@ export default function Login() {
           navigate("/");
       }
     } catch (err) {
-      setError(err.response?.data?.message || err.message || "Login failed");
+      console.error("❌ Login error:", err);
+
+      if (err.response) {
+        switch (err.response.status) {
+          case 400:
+            setError("All fields are required.");
+            break;
+          case 404:
+            setError("User not found. Please register first.");
+            break;
+          case 401:
+            setError("Invalid credentials. Please try again.");
+            break;
+          default:
+            setError(err.response.data?.message || "Something went wrong.");
+        }
+      } else {
+        setError("Network error. Please try again.");
+      }
     } finally {
       setLoading(false);
     }
@@ -57,7 +74,10 @@ export default function Login() {
       <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
         <h2 className="text-3xl font-bold text-center mb-6 text-gray-800">Login</h2>
 
-        {error && <p className="text-red-500 text-center mb-4">{error}</p>}
+        {/* Error message */}
+        {error && (
+          <p className="text-red-500 text-center mb-4 font-medium">{error}</p>
+        )}
 
         <form className="space-y-6" onSubmit={handleSubmit}>
           <input
@@ -68,6 +88,7 @@ export default function Login() {
             placeholder="Email"
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#cc7408] focus:border-[#cc7408] transition-all duration-200"
             disabled={loading}
+            required
           />
           <input
             type="password"
@@ -77,10 +98,15 @@ export default function Login() {
             placeholder="Password"
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#cc7408] focus:border-[#cc7408] transition-all duration-200"
             disabled={loading}
+            required
           />
           <button
             type="submit"
-            className="w-full bg-[#cc7408] hover:bg-[#a35e07] text-white font-bold py-2 px-4 rounded-md transition-all duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-[#cc7408] focus:ring-offset-2"
+            className={`w-full font-bold py-2 px-4 rounded-md transition-all duration-300 transform focus:outline-none focus:ring-2 focus:ring-[#cc7408] focus:ring-offset-2 ${
+              loading
+                ? "bg-gray-400 cursor-not-allowed text-white"
+                : "bg-[#cc7408] hover:bg-[#a35e07] text-white hover:scale-105"
+            }`}
             disabled={loading}
           >
             {loading ? "Logging in..." : "Login"}
@@ -97,4 +123,3 @@ export default function Login() {
     </div>
   );
 }
-

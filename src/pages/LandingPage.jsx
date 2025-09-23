@@ -3,6 +3,7 @@ import HowItWorks from "../components/HowItWorks";
 import Services from "../components/Services";
 import FooterCTA from "../components/Footer";
 
+import { NavLink } from 'react-router-dom';
 
 export default function LandingPage() {
 
@@ -25,9 +26,12 @@ export default function LandingPage() {
         <p className="text-lg mb-6">
           Post your job, connect with skilled workers, and get the work done easily.
         </p>
-        <button className="bg-primary text-white px-6 py-3 rounded-lg hover:bg-orange-700">
-          Get Started
-        </button>
+        <NavLink
+        to="/register"
+        className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 inline-block"
+      >
+        Get Started
+      </NavLink>
       </section>
       <section className="py-16 px-6 bg-white text-center">
         <h2 className="text-3xl font-semibold mb-10">How It Works</h2>

@@ -2,11 +2,13 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 import { useSelector, useDispatch } from "react-redux";
-import { clearUser } from "../features/auth/authSlice.js"; // adjust path if needed
-
+import { clearUser } from "../features/auth/authSlice.js";
+import { logoutUser } from "../services/authService.js";
+import { useNavigate } from 'react-router-dom';
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
+  const navigate = useNavigate();
 
   const { user, isAuthenticated } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
@@ -14,9 +16,11 @@ export default function Navbar() {
   const navLinkClasses = ({ isActive }) =>
     isActive ? "underline font-semibold" : "hover:underline";
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     setIsProfileDropdownOpen(false);
     dispatch(clearUser());
+    await logoutUser();
+    navigate('/');
   };
 
   return (
@@ -31,9 +35,7 @@ export default function Navbar() {
         <NavLink to="/" className={navLinkClasses}>
           Home
         </NavLink>
-        <NavLink to="/about" className={navLinkClasses}>
-          About
-        </NavLink>
+
 
         {/* Role-based links (only when logged in) */}
         {isAuthenticated && user?.role === "client" && (
@@ -42,12 +44,21 @@ export default function Navbar() {
           </NavLink>
         )}
         {isAuthenticated && user?.role === "freelancer" && (
-          <NavLink to="/freelancer/jobs" className={navLinkClasses}>
-            My Jobs
-          </NavLink>
+          <>
+            <NavLink to="/freelancer/dashboard" className={navLinkClasses}>
+              Dashboard
+            </NavLink>
+            <NavLink to="/freelancer/jobs" className={navLinkClasses}>
+              My Jobs
+            </NavLink>
+          </>
         )}
+
         {isAuthenticated && user?.role === "admin" && (
           <>
+            <NavLink to="/admin/dashboard" className={navLinkClasses}>
+              Dashboard
+            </NavLink>
             <NavLink to="/client/posts" className={navLinkClasses}>
               My Posts
             </NavLink>
@@ -56,6 +67,10 @@ export default function Navbar() {
             </NavLink>
           </>
         )}
+
+        <NavLink to="/about" className={navLinkClasses}>
+          About
+        </NavLink>
 
         {/* If not logged in → show Login/Register */}
         {!isAuthenticated && (
@@ -139,13 +154,7 @@ export default function Navbar() {
           >
             Home
           </NavLink>
-          <NavLink
-            to="/about"
-            className={navLinkClasses}
-            onClick={() => setIsOpen(false)}
-          >
-            About
-          </NavLink>
+
 
           {/* Role-based links */}
           {isAuthenticated && user?.role === "client" && (
@@ -158,13 +167,18 @@ export default function Navbar() {
             </NavLink>
           )}
           {isAuthenticated && user?.role === "freelancer" && (
-            <NavLink
-              to="/freelancer/jobs"
-              className={navLinkClasses}
-              onClick={() => setIsOpen(false)}
-            >
-              My Jobs
-            </NavLink>
+            <>
+              <NavLink to="/freelancer/dashboard" className={navLinkClasses}>
+                Dashboard
+              </NavLink>
+              <NavLink
+                to="/freelancer/jobs"
+                className={navLinkClasses}
+                onClick={() => setIsOpen(false)}
+              >
+                My Jobs
+              </NavLink>
+            </>
           )}
           {isAuthenticated && user?.role === "admin" && (
             <>
@@ -184,6 +198,14 @@ export default function Navbar() {
               </NavLink>
             </>
           )}
+
+          <NavLink
+            to="/about"
+            className={navLinkClasses}
+            onClick={() => setIsOpen(false)}
+          >
+            About
+          </NavLink>
 
           {/* If not logged in → show Login/Register */}
           {!isAuthenticated && (

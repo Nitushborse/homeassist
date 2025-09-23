@@ -88,6 +88,8 @@ import MyJobDetailsPage from './components/MyJobDetails.jsx';
 import JobDetailsPage from './components/JobDetails.jsx';
 
 import ProtectedRoute from './components/ProtectedRoute.jsx';
+import AdminDashboardPage from './pages/AdminDashboard.jsx';
+import UserListPage from './pages/UserListPage.jsx'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -102,6 +104,12 @@ const router = createBrowserRouter(
       <Route element={<ProtectedRoute />}>
         <Route path='profile' element={<ProfilePage />} />
         <Route path='feedback' element={<FeedbackPage />} />
+      </Route>
+
+      {/* admin Routes (only admin) */}
+      <Route element={<ProtectedRoute allowedRoles={["client", "admin"]} />}>
+        <Route path='admin/dashboard' element={<AdminDashboardPage />} />
+        <Route path="admin/users/:userType" element={<UserListPage />} />
       </Route>
 
       {/* Client Routes (only clients) */}

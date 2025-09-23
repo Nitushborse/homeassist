@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom';
 export default function Hero() {
   return (
     <section className="bg-blue-50 py-20 px-6 text-center">
@@ -7,9 +8,12 @@ export default function Hero() {
       <p className="text-lg mb-6">
         Post your job, connect with skilled workers, and get the work done easily.
       </p>
-      <button className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700">
+      <NavLink
+        to="/register"
+        className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 inline-block"
+      >
         Get Started
-      </button>
+      </NavLink>
     </section>
   );
 }
