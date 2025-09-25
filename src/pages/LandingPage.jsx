@@ -28,7 +28,7 @@ export default function LandingPage() {
         </p>
         <NavLink
         to="/register"
-        className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 inline-block"
+        className="bg-[var(--color-primary)] ] text-white px-6 py-3 rounded-lg inline-block"
       >
         Get Started
       </NavLink>

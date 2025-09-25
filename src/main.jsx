@@ -71,6 +71,7 @@ import LandingPage from './pages/LandingPage.jsx';
 import AboutPage from './pages/AboutPage.jsx';
 import Register from './pages/Register.jsx';
 import Login from './pages/Login.jsx';
+import AdminLogin from './pages/AdminLogin.jsx'
 
 // Common User Pages
 import ProfilePage from './pages/Profile.jsx';
@@ -99,6 +100,7 @@ const router = createBrowserRouter(
       <Route path='about' element={<AboutPage />} />
       <Route path='register' element={<Register />} />
       <Route path='login' element={<Login />} />
+      <Route path='Adminlogin' element={<AdminLogin />} />
 
       {/* Protected Routes for All Authenticated Users */}
       <Route element={<ProtectedRoute />}>

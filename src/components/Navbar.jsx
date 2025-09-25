@@ -75,12 +75,19 @@ export default function Navbar() {
         {/* If not logged in → show Login/Register */}
         {!isAuthenticated && (
           <>
-            <NavLink to="/login" className={navLinkClasses}>
-              Login
-            </NavLink>
+
             <NavLink to="/register" className={navLinkClasses}>
               Register
             </NavLink>
+            <NavLink to="/login" className={navLinkClasses}>
+              Login
+            </NavLink>
+
+            <p className=" mx-[-15px]">|</p>
+            <NavLink to="/Adminlogin" className={navLinkClasses}>
+              Admin
+            </NavLink>
+
           </>
         )}
       </div>
