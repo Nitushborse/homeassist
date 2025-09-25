@@ -88,7 +88,7 @@ const PostDetailsPage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-100 p-8 flex justify-center items-center">
+      <div className="min-h-screen bg-gray-100 p-8 flex justify-center items-center container-centered mt-2">
         <p className="text-gray-600 text-lg">Loading...</p>
       </div>
     );
@@ -96,7 +96,7 @@ const PostDetailsPage = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-gray-100 p-8 flex justify-center items-center">
+      <div className="min-h-screen bg-gray-100 p-8 flex justify-center items-center container-centered mt-2">
         <p className="text-red-500 text-lg">{error}</p>
       </div>
     );
@@ -114,7 +114,7 @@ const PostDetailsPage = () => {
     jobDetails.status === "completed" || jobDetails.status === "cancelled";
 
   return (
-    <div className="min-h-screen bg-gray-100 p-8">
+    <div className="min-h-screen bg-gray-100 p-8 container-centered mt-2">
       <div className="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-xl">
         <h2 className="mb-6 text-3xl font-bold text-gray-800">Post Details</h2>
 
