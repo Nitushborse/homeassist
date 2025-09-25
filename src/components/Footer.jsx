@@ -18,15 +18,15 @@ export default function Footer() {
             <h3 className="font-semibold text-lg">Quick Links</h3>
             <NavLink to="/" className="hover:underline">Home</NavLink>
             <NavLink to="/about" className="hover:underline">About</NavLink>
-            <NavLink to="/services" className="hover:underline">Services</NavLink>
-            <NavLink to="/feedback" className="hover:underline">Feedback</NavLink>
+            {/* <NavLink to="/" className="hover:underline">Services</NavLink>
+            <NavLink to="/" className="hover:underline">Feedback</NavLink> */}
           </div>
 
           {/* Contact Info */}
           <div className="flex flex-col gap-2">
             <h3 className="font-semibold text-lg">Contact Us</h3>
-            <p>Email: support@homeassist.com</p>
-            <p>Phone: +91 98765 43210</p>
+            <p>Email: pkpatil.366@gmail.com</p>
+            <p>Phone: +91 9021574896</p>
             <p>Address: Shirpur, Maharashtra, India</p>
           </div>
         </div>

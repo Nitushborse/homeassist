@@ -80,7 +80,7 @@ const AboutPage = () => {
             Join our growing community and find the perfect match for your needs.
           </p>
           <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-4">
-            <NavLink to="/create-post" className="w-full sm:w-auto px-8 py-3 font-bold text-white transition-colors duration-300 rounded-full shadow-lg bg-green-500 hover:bg-green-600">
+            <NavLink to="/register" className="w-full sm:w-auto px-8 py-3 font-bold text-white transition-colors duration-300 rounded-full shadow-lg bg-green-500 hover:bg-green-600">
               Post a Job
             </NavLink>
             <NavLink to="/register" className="w-full sm:w-auto px-8 py-3 font-bold text-white transition-colors duration-300 rounded-full shadow-lg bg-yellow-500 hover:bg-yellow-600">
