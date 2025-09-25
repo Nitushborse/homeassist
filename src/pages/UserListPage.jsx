@@ -1,5 +1,3 @@
-// UserListPage.js (Parent Component)
-
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import UserListTable from '../components/UserListTable'; // Import the new component
