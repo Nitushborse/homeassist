@@ -1,17 +1,38 @@
-
 import { useEffect } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from "react-redux";
 import { fetchClientJobs } from "../features/job/jobSlice";
+import { checkProfile } from "../services/authService"; // <-- import service
+import { toast } from "react-toastify";
 const MyPostPage = () => {
     // Increased the number of dummy posts to demonstrate the scrollbar functionality
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { clientJobs, loading, error } = useSelector((state) => state.jobs);
-   
+
 
     useEffect(() => {
         dispatch(fetchClientJobs());
     }, [dispatch]);
+
+
+    const handleNewPost = async () => {
+        try {
+            const res = await checkProfile();
+
+            console.log(res)
+
+            if (!res?.data?.isProfileComplete) {
+                toast.warning("Please complete your profile before creating a post.");
+                return;
+            }
+
+            navigate("/client/post/create");
+        } catch (err) {
+            console.error(err);
+            toast.error("Something went wrong while checking profile.");
+        }
+    };
 
     // console.log(clientJobs)
 
@@ -31,13 +52,12 @@ const MyPostPage = () => {
                 {/* Header and Call to Action */}
                 <div className="flex justify-between items-center mb-6">
                     <h2 className="text-3xl font-bold text-gray-800">My Posts</h2>
-                    <NavLink to="/client/post/create">
-                        <button
-                            className="px-6 py-3 font-semibold text-white transition-all duration-300 rounded-full shadow-lg bg-primary hover:bg-blue-600 hover:shadow-xl"
-                        >
-                            New Post
-                        </button>
-                    </NavLink>
+                    <button
+                        onClick={handleNewPost}
+                        className="px-6 py-3 font-semibold text-white transition-all duration-300 rounded-full shadow-lg bg-primary hover:bg-blue-600 hover:shadow-xl"
+                    >
+                        New Post
+                    </button>
                 </div>
 
                 {/* Posts Container with a fixed height and scrollbar for overflow */}

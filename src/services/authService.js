@@ -39,6 +39,11 @@ export const updateProfile = async (userData) => {
   return data.data; // updated user
 };
 
+export const checkProfile = async () => {
+  const {data} = await axiosInstance.get("/user/checkProfile")
+  return data
+}
+
 export const getUserById = async (userId) => {
   const { data } = await axiosInstance.get(`/user/getuserbyid/${userId}`);
   return data.data; 

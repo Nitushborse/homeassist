@@ -95,14 +95,14 @@ const MyJobDetailsPage = () => {
             </div>
 
             {/* Action buttons */}
-            <div className="flex space-x-4 mt-6">
+            {/* <div className="flex space-x-4 mt-6">
               <button className="flex-1 px-4 py-3 font-semibold text-white rounded-lg shadow-lg bg-green-500 hover:bg-green-600">
                 Done
               </button>
               <button className="flex-1 px-4 py-3 font-semibold text-white rounded-lg shadow-lg bg-red-500 hover:bg-red-600">
                 Cancel
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

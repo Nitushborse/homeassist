@@ -6,6 +6,9 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchUser } from "./features/auth/authSlice"; 
 import { fetchClientJobs, fetchRequestedJobs } from "./features/job/jobSlice";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 
 function App() {
   const location = useLocation();
@@ -17,7 +20,7 @@ function App() {
 
   useEffect(() => {
     dispatch(fetchUser());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (isAuthenticated && user) {
@@ -33,11 +36,16 @@ function App() {
     }
   }, [dispatch, isAuthenticated, user]);
 
+  if (loading) {
+    return <div className="flex items-center justify-center h-screen">Loading...</div>;
+  }
+
   return (
     <>
       {!hideLayout && <Navbar />}
       <Outlet />
       {!hideLayout && <Footer />}
+      <ToastContainer position="top-right" autoClose={3000} />
     </>
   )
 }

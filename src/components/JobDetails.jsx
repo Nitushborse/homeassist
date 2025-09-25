@@ -2,6 +2,9 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { getfulljobdetail, createRequest } from "../services/jobsService";
+import { checkProfile } from "../services/authService";
+import { toast } from "react-toastify";
+
 
 const JobDetailsPage = () => {
     const { id } = useParams();
@@ -41,6 +44,14 @@ const JobDetailsPage = () => {
 
     const handleRequest = async () => {
         try {
+            // const { isProfileComplete, missingFields } = await checkProfile();
+            const data = await checkProfile();
+
+            if (!data.data.isProfileComplete) {
+                toast.warning(`Please complete your profile first. Missing: ${data.data.missingFields.join(", ")}`);
+                return; 
+            }
+
             const res = await createRequest(id);
             setAlreadyRequested(true);
             setRequestStatus(res.status); // backend returns { status: "pending" }
