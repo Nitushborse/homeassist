@@ -39,7 +39,8 @@ const App = () => {
       reader.onloadend = () => {
         setFormData(prev => ({
           ...prev,
-          avatarPreview: reader.result
+          avatarFile: file,
+          avatarPreview: reader.result,
         }));
       };
       reader.readAsDataURL(file);

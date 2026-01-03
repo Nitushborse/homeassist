@@ -32,9 +32,14 @@ export const updateProfile = async (userData) => {
   if (userData.bio) formData.append("bio", userData.bio);
   if (userData.avatarFile) formData.append("avatar", userData.avatarFile);
 
-  const { data } = await axiosInstance.patch("/user/profile", formData, {
-    headers: { "Content-Type": "multipart/form-data" },
-  });
+  // const { data } = await axiosInstance.patch("/user/profile", formData, {
+  //   headers: { "Content-Type": "multipart/form-data" },
+  // });
+
+  const { data } = await axiosInstance.put(
+    "/user/profile",
+    formData
+  );
 
   return data.data; // updated user
 };

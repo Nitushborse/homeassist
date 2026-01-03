@@ -67,7 +67,7 @@ const AboutPage = () => {
         <div className="mb-16 bg-primary text-white p-8 md:p-12 rounded-lg shadow-lg">
           <h2 className="text-3xl font-bold text-center mb-6">Our Mission</h2>
           <p className="text-lg md:text-xl text-center max-w-3xl mx-auto">
-            [cite_start]Our mission is to build a reliable online service marketplace where user(client) post the jobs and worker(freelancer) give the proposel(request) to jobs then client accept best from list or requests[cite: 1].
+            Our mission is to build a reliable online service marketplace where user(client) post the jobs and worker(freelancer) give the proposel(request) to jobs then client accept best from list or requests.
           </p>
         </div>
 
